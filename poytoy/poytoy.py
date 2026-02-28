@@ -39,6 +39,7 @@ def main():
 
     action = sys.argv[1]
     project_name = sys.argv[2]
+    extra_args = sys.argv[3:]
 
     project_path = find_project(project_name)
     config = load_config(project_path)
@@ -51,6 +52,9 @@ def main():
     if not cmd:
         print(f"No command defined for '{action}'")
         sys.exit(1)
+
+    if len(sys.argv) > 3:
+        cmd = " ".join([cmd] + extra_args)
 
     run_command(cmd, project_path)
 
